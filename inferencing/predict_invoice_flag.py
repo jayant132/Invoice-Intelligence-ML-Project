@@ -10,6 +10,8 @@ sample_data = pd.DataFrame([
     {"Invoice_Quantity": 50, "Invoice_Dollars": 2000, "Freight_Cost": 75, "Total_Brands": 1, "Total_Item_Quantity": 50, "Total_Item_Dollars": 1990, "Avg_Receiving_Delay": 2},
 ])
 
+sample_data["Dollar_Gap"] = (sample_data["Invoice_Dollars"] - sample_data["Total_Item_Dollars"]).abs()
+
 X_scaled = scaler.transform(sample_data)
 sample_data["predicted_flag"] = model.predict(X_scaled)
 
