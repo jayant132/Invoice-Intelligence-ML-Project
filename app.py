@@ -3,7 +3,9 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-st.set_page_config(page_title="Invoice Intelligence", page_icon="🧾", layout="centered")
+from document_intelligence.streamlit_view import render_document_intelligence_tab
+
+st.set_page_config(page_title="Invoice Intelligence", page_icon="🧾", layout="wide")
 
 
 @st.cache_resource
@@ -18,9 +20,11 @@ def load_models():
 flag_model, scaler, freight_model = load_models()
 
 st.title("🧾 Invoice Intelligence")
-st.caption("ML-powered freight cost prediction & invoice fraud detection")
+st.caption("Document Intelligence · freight cost prediction · invoice fraud detection")
 
-tab1, tab2 = st.tabs(["🚩 Invoice Flagging", "📦 Freight Cost Prediction"])
+tab1, tab2, tab3 = st.tabs(
+    ["🚩 Invoice Flagging", "📦 Freight Cost Prediction", "🧠 Document Intelligence"]
+)
 
 with tab1:
     st.subheader("Check if an invoice looks risky")
@@ -99,5 +103,8 @@ with tab2:
     sample["Predicted Freight Cost"] = freight_model.predict(sample[["Dollars"]]).round(2)
     st.dataframe(sample, use_container_width=True, hide_index=True)
 
+with tab3:
+    render_document_intelligence_tab()
+
 st.divider()
-st.caption("Models trained on real vendor invoice data · Random Forest classifier · Decision Tree regressor")
+st.caption("Models trained on real vendor invoice data · Random Forest classifier · Decision Tree regressor · OCR + Pydantic structured extraction")

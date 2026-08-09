@@ -1,0 +1,9 @@
+# Optional OCR engines for the Document Intelligence pipeline.
+# Install at least one. Recommended: PaddleOCR (pure pip install, no system deps).
+
+# PaddleOCR (recommended)
+paddleocr==2.7.3
+paddlepaddle==2.6.2
+
+# Alternative: Tesseract (requires the Tesseract binary installed separately)
+# pytesseract
